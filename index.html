@@ -1,1 +1,278 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AlfenMC - Minecraft Sunucusu</title>
+    <style>
+        /* Genel Stil */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #1e1e1e;
+            color: #fff;
+            overflow-x: hidden;
+        }
 
+        /* Menü Stili */
+        nav {
+            background-color: #333;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav .logo {
+            font-size: 2em;
+            font-weight: bold;
+            color: #4caf50;
+            text-decoration: none;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            margin: 0;
+            padding: 0;
+            gap: 15px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 1.2em;
+            padding: 8px 15px;
+            transition: all 0.3s;
+        }
+
+        nav ul li a:hover {
+            background-color: #4caf50;
+            color: #000;
+            border-radius: 5px;
+        }
+
+        /* Sağ Üst Duyuru Butonu */
+        .announcement-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #4caf50;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1em;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            z-index: 1001;
+            transition: background 0.3s;
+        }
+
+        .announcement-btn:hover {
+            background-color: #81c784;
+        }
+
+        /* Kahraman Alanı */
+        header {
+            text-align: center;
+            padding: 80px 20px;
+            background: url('images/AnaSayfa.jpg') no-repeat center center/cover;
+            color: #fff;
+        }
+
+        header h1 {
+            font-size: 4em;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+        }
+
+        header p {
+            font-size: 1.5em;
+            margin-bottom: 30px;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+        }
+
+        header .copy-btn {
+            background: linear-gradient(45deg, #4caf50, #81c784);
+            color: #fff;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.5em;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        header .copy-btn:hover {
+            background: linear-gradient(45deg, #81c784, #4caf50);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+        }
+
+        /* İçerik Bölümleri */
+        section {
+            padding: 50px 20px;
+            text-align: center;
+        }
+
+        section:nth-child(even) {
+            background-color: #2e2e2e;
+        }
+
+        section h2 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+
+        section p {
+            font-size: 1.2em;
+            margin-bottom: 30px;
+        }
+
+        .features {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .feature {
+            background: #333;
+            padding: 20px;
+            border-radius: 10px;
+            width: 300px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .feature img {
+            width: 100%;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .features {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .feature {
+                width: 90%;
+            }
+        }
+
+        .announcement {
+            background-color: #333;
+            padding: 30px 20px;
+            text-align: center;
+            color: #fff;
+            margin-top: 20px;
+        }
+
+        .announcement img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .announcement h3 {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        .announcement p {
+            font-size: 1.2em;
+        }
+
+        footer {
+            background-color: #111;
+            padding: 20px;
+            text-align: center;
+            font-size: 0.9em;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+    <!-- Sağ Üst Duyuru Butonu -->
+    <button class="announcement-btn" onclick="scrollToAnnouncement()">Duyuru</button>
+
+    <!-- Navigasyon Menüsü -->
+    <nav>
+        <a href="#" class="logo">AlfenMC</a>
+        <ul>
+            <li><a href="#features">Özellikler</a></li>
+            <li><a href="#contact" onclick="openModal()">İletişim</a></li>
+            <li><a href="#commands">Komutlar</a></li>
+        </ul>
+    </nav>
+
+    <!-- Kahraman Alanı -->
+    <header>
+        <h1>AlfenMC Sunucusu</h1>
+        <p>Klasik Minecraft keyfini yeniden keşfedin!</p>
+        <button class="copy-btn" onclick="copyIP()">Sunucu IP'si: alfenmc.com.tr</button>
+    </header>
+
+    <!-- Komutlar ve diğer bölümler -->
+    <section id="features">
+        <h2>Sunucumuzun Harika Özellikleri</h2>
+        <p>Oyuncularımızın en sevdiği özelliklerle dolu bir Minecraft dünyası sunuyoruz!</p>
+        <div class="features">
+            <div class="feature">
+                <img src="images/Plugin.jpg" alt="SMP">
+                <h3>Plugin Destekli SMP</h3>
+                <p>Survival Multiplayer'ı yepyeni bir seviyeye taşıdık.</p>
+            </div>
+            <div class="feature">
+                <img src="images/Topluluk.jpg" alt="Topluluk">
+                <h3>Aktif Topluluk</h3>
+                <p>Her zaman oyunda olan dostça bir oyuncu topluluğu.</p>
+            </div>
+            <div class="feature">
+                <img src="images/Destek.jpg" alt="Destek">
+                <h3>7/24 Destek</h3>
+                <p>Her türlü sorunuzu yanıtlamak için buradayız.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Duyuru Bölümü -->
+    <section class="announcement">
+        <h3>Duyuru</h3>
+        <h3> </h3>
+        <h3> </h3>
+        <img src="images/Duyuru.jpg" alt="Duyuru Resmi">
+        <h3>SUNUCUMUZ AÇILIYOOOOR!!!</h3>
+        <p>Sunucumuz 28.12.2024 Tarihinde Açılıcaktır!!</p>
+    </section>
+
+    <footer>
+        <p>© 2024 AlfenMC. Tüm hakları saklıdır.</p>
+    </footer>
+
+    <script>
+        function copyIP() {
+            const ip = "alfenmc.com.tr";
+            navigator.clipboard.writeText(ip).then(() => {
+                alert("Sunucu IP'si kopyalandı: " + ip);
+            }).catch(err => {
+                alert("IP kopyalanırken bir hata oluştu!");
+            });
+        }
+
+        function scrollToAnnouncement() {
+            document.querySelector('.announcement').scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
